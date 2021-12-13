@@ -658,6 +658,7 @@
     (do-zipfile-entries (name entry zip)
       (let* (#+nil (name (ppcre:regex-replace-all "[/*?]" name "_"))
              #+nil (name (subseq name 0 (min (length name) 128)))
+             (name (substitute #\/ #\\ name))
              (filename (merge-pathnames name target-directory)))
         (ensure-directories-exist filename)
         (unless (char= (elt name (1- (length name))) #\/)
